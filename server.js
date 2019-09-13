@@ -9,9 +9,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.listen(8080, () => console.log('Server Running on 3000...'));
-
 var port = process.env.PORT || 8080;
+
+app.listen(port, () => console.log('Server Running on 3000...'));
 
 const api_client = new Twitter({
     consumer_key: config.CONSUMER_KEY,
@@ -22,14 +22,14 @@ const api_client = new Twitter({
 
 app.get('/home_timeline', (req, res) => {
     const params = { tweet_mode: 'extended', count: 10 };
+    res.send('Node App');
+    // api_client
+    //     .get(`statuses/home_timeline`, params)
+    //     .then(timeline => {
 
-    api_client
-        .get(`statuses/home_timeline`, params)
-        .then(timeline => {
-
-            res.send(timeline);
-        })
-        .catch(error => {
-            res.send(error);
-        });
+    //         res.send(timeline);
+    //     })
+    //     .catch(error => {
+    //         res.send(error);
+    //     });
 });
