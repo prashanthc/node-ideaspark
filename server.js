@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.listen(3000, () => console.log('Server Running on 3000...'));
+app.listen(8080, () => console.log('Server Running on 3000...'));
 
 const api_client = new Twitter({
     consumer_key: config.CONSUMER_KEY,
