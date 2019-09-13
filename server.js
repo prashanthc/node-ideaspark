@@ -11,6 +11,8 @@ app.use(cors());
 
 app.listen(8080, () => console.log('Server Running on 3000...'));
 
+var port = process.env.PORT || 8080;
+
 const api_client = new Twitter({
     consumer_key: config.CONSUMER_KEY,
     consumer_secret: config.CONSUMER_SECRET,
