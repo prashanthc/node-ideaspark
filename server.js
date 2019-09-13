@@ -2,6 +2,7 @@ const express = require('express');
 const Twitter = require('twit');
 const app = express();
 const bodyParser = require('body-parser');
+const path = require('path');
 const cors = require('cors');
 const config = require('./config.json');
 
@@ -11,7 +12,13 @@ app.use(cors());
 
 var port = process.env.PORT || 8080;
 
-app.listen(port, () => console.log('Server Running on 3000...'));
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
+
+app.listen(port, () => console.log(`Server Running on ${port}...`));
 
 const api_client = new Twitter({
     consumer_key: config.CONSUMER_KEY,
@@ -30,5 +37,5 @@ app.get('/home_timeline', (req, res) => {
         })
         .catch(error => {
             res.send(error);
-        });
+    });
 });
