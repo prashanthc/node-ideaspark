@@ -23,13 +23,13 @@ const api_client = new Twitter({
 app.get('/home_timeline', (req, res) => {
     const params = { tweet_mode: 'extended', count: 10 };
     res.send('Node App');
-    // api_client
-    //     .get(`statuses/home_timeline`, params)
-    //     .then(timeline => {
+    api_client
+        .get(`statuses/home_timeline`, params)
+        .then(timeline => {
 
-    //         res.send(timeline);
-    //     })
-    //     .catch(error => {
-    //         res.send(error);
-    //     });
+            res.send(timeline);
+        })
+        .catch(error => {
+            res.send(error);
+        });
 });
