@@ -10,13 +10,4 @@ export class AppComponent {
   title = 'angular-ideaspark';
 
   constructor(private authService: AuthenticationService) {}
-
-  login() {
-    this.authService.getRequestToken().subscribe(res=>{
-      console.log(`Token Received ${res}`);
-      if (res && res.oauth_callback_confirmed){
-        this.authService.login(res.oauth_token);
-      }
-    }, err=>console.log(err));
-  }
 }
