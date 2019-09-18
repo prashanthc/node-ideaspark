@@ -3,13 +3,24 @@
 var passport = require('passport'),
     tokenStrategy = require('passport-twitter-token'),
     db = require('./mongoose'),
-    config = require('../app.config.js'),
+    config = require('../config/app.config'),
     User = db.User;
 
 module.exports = () => {
+
+    passport.serializeUser((user, done)=>{
+        done(null, user.twitterProvider.id);
+    });
+
+    passport.deserializeUser((id, done)=>{
+        User.findOne({ 'twitterProvider.id': id}).then((user)=>{
+            done(null, user);
+        });
+    });
+
     passport.use(new tokenStrategy({
-        consumerKey: config.consumerKey,
-        consumerSecret: config.consumerSecret,
+        consumerKey: config.twitter.consumerKey,
+        consumerSecret: config.twitter.consumerSecret,
         includeEmail: true
     },
         (token, tokenSecret, profile, done) => {

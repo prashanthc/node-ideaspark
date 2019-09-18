@@ -14,8 +14,7 @@ const User = new Schema({
         type: {
             id: String,
             token: String
-        },
-        select: false
+        }
     }
 
 });
